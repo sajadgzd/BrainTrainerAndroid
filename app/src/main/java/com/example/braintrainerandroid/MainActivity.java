@@ -1,8 +1,10 @@
 package com.example.braintrainerandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,17 +21,56 @@ public class MainActivity extends AppCompatActivity {
     int score = 0;
     int numberOfQuestions = 0;
     TextView scoreTextView;
+    TextView timerTextView;
+
+    TextView sumTextView;
+    Button button0;
+    Button button1;
+    Button button2;
+    Button button3;
+
+    Button playAgainButton;
+    ConstraintLayout gameLayout;
 
     //Array to hold the numbers
     ArrayList<Integer> answers = new ArrayList<>();
 
+    public void playAgain(View view){
+        // reset the game
+        score = 0;
+        numberOfQuestions = 0;
+        timerTextView.setText("30s");
+        scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+
+        newQuestion();
+        playAgainButton.setVisibility(View.INVISIBLE);
+
+        new CountDownTimer(4100, 1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000 + "s"));
+            }
+
+            @Override
+            public void onFinish() {
+                resultTextView.setText("Time's up!");
+                timerTextView.setText("0s");
+                playAgainButton.setVisibility(View.VISIBLE);
+            }
+        }.start();
+
+    }
+
     // Go button disappears once clicked
     public void start(View view){
         goButton.setVisibility(View.INVISIBLE);
+        playAgain(findViewById(R.id.timerTextView));
+        gameLayout.setVisibility(View.VISIBLE);
     }
 
     public void chooseAnswer(View view){
-        Log.i("tag: ",view.getTag().toString()) ;
+        // Log.i("tag: ",view.getTag().toString()) ;
         // checking to see if the choice is correct or wrong
         if (Integer.toString(locationOfCorrectAnswer).equals(view.getTag().toString())){
             Log.i("Correct!!", "You win");
@@ -42,27 +83,10 @@ public class MainActivity extends AppCompatActivity {
         }
         numberOfQuestions++;
         scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+        newQuestion();
     }
 
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        TextView sumTextView = findViewById(R.id.sumTextView);
-        Button button0 = findViewById(R.id.button0);
-        Button button1 = findViewById(R.id.button1);
-        Button button2 = findViewById(R.id.button2);
-        Button button3 = findViewById(R.id.button3);
-
-        resultTextView = findViewById(R.id.resultTextView);
-        scoreTextView = findViewById(R.id.scoreTextView);
-        goButton = findViewById(R.id.goButton);
-
+    public void newQuestion(){
         Random rand = new Random();
         int a = rand.nextInt(21); // range 0 to 20
         int b = rand.nextInt(21);
@@ -71,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
         // set the location of correct answer
         locationOfCorrectAnswer = rand.nextInt(4);
+
+        //clear out the array of answers before the next round of questions
+        answers.clear();
 
         for (int i=0; i<4; i++){
             if(i == locationOfCorrectAnswer){
@@ -90,8 +117,31 @@ public class MainActivity extends AppCompatActivity {
         button2.setText(Integer.toString(answers.get(2)));
         button3.setText(Integer.toString(answers.get(3)));
 
+    }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        sumTextView = findViewById(R.id.sumTextView);
+        button0 = findViewById(R.id.button0);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+
+        resultTextView = findViewById(R.id.resultTextView);
+        scoreTextView = findViewById(R.id.scoreTextView);
+        timerTextView = findViewById(R.id.timerTextView);
+        goButton = findViewById(R.id.goButton);
+        playAgainButton = findViewById(R.id.playAgainButton);
+
+        goButton.setVisibility(View.VISIBLE);
+
+        gameLayout = findViewById(R.id.gameLayout);
+
+        gameLayout.setVisibility(View.INVISIBLE);
 
 
 
