@@ -25,7 +25,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <TextView
             android:id="@+id/resultTextView"
@@ -33,69 +35,88 @@
             android:layout_height="wrap_content"
             android:text="Correct!"
             android:textSize="50sp"
-            tools:layout_editor_absoluteX="118dp"
-            tools:layout_editor_absoluteY="458dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:layout_constraintVertical_bias="0.058" />
 
         <Button
             android:id="@+id/playAgainButton"
-            android:layout_width="wrap_content"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:onClick="playAgain"
             android:text="Play again!"
             android:textSize="30sp"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="550dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultTextView" />
 
         <TextView
             android:id="@+id/timerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:background="@color/colorAccent"
             android:padding="10dp"
             android:text="30s"
             android:textSize="40sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
             android:padding="15dp"
             android:text="31 + 7"
             android:textSize="30sp"
-            tools:layout_editor_absoluteX="150dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintEnd_toStartOf="@+id/scoreTextView"
+            app:layout_constraintStart_toEndOf="@+id/timerTextView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/scoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/holo_blue_dark"
             android:padding="10dp"
             android:text="0/0"
             android:textSize="40sp"
-            tools:layout_editor_absoluteX="314dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="43dp"
-            tools:layout_editor_absoluteY="101dp">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sumTextView">
+
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="216dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/button0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/default_gap"
                     android:layout_marginVertical="@dimen/default_gap"
@@ -110,8 +131,8 @@
 
                 <Button
                     android:id="@+id/button1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/default_gap"
                     android:layout_marginVertical="@dimen/default_gap"
@@ -126,17 +147,16 @@
 
             </TableRow>
 
-
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/default_gap"
                     android:layout_marginVertical="@dimen/default_gap"
@@ -151,8 +171,8 @@
 
                 <Button
                     android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/default_gap"
                     android:layout_marginVertical="@dimen/default_gap"
