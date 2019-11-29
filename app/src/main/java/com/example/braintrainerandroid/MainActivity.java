@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout gameLayout;
     TextView welcomeTextView;
     TableLayout tableLayout;
+    TextView highestScoreTextView;
 
     // ArrayList to hold the Integers, one of which is correct answer to the question,
     // other 3 are randomly generated wrong Integers
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
+        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 // get the highest score and show to the user
-                resultTextView.setText("Time's up!\n Your high score is: " + Collections.max(scoresLst));
+                resultTextView.setText("Time's up!");
+                highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
                 timerTextView.setText("0s");
                 playAgainButton.setVisibility(View.VISIBLE);
                 tableLayout.setVisibility(View.INVISIBLE);
@@ -113,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         numberOfQuestions++;
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
+        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 
         newQuestion();
     }
@@ -174,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         gameLayout = findViewById(R.id.gameLayout);
         tableLayout = findViewById(R.id.tableLayout);
         welcomeTextView = findViewById(R.id.welcomeTextView);
+        highestScoreTextView = findViewById(R.id.highestScoreTextView);
 
         // Go button and Welcome message show up at landing page
         goButton.setVisibility(View.VISIBLE);
