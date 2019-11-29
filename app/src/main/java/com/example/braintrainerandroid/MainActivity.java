@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     //Array to hold the numbers
     ArrayList<Integer> answers = new ArrayList<>();
+    ArrayList<String> welcomeMsgs = new ArrayList<String>(){
+        {
+            add("Wanna Train Your Brain?");
+            add("Let's play!");
+            add("Ready for challenge?");
+            add("Got 30 seconds to play?!");
+        }
+    };
+
 
     // play again is clicked or game starts
     public void playAgain(View view){
@@ -109,16 +118,19 @@ public class MainActivity extends AppCompatActivity {
         //clear out the array of answers before the next round of questions
         answers.clear();
 
+        int wrongPrev = a + b;
+
         // add one correct answer and three wrong answers to answers array
         for (int i=0; i<4; i++){
             if(i == locationOfCorrectAnswer){
                 answers.add(a+b);
             } else {
                 int wrongAnswer = rand.nextInt(41);
-                while(wrongAnswer == a+b)
+                while(wrongAnswer == a+b || wrongAnswer == wrongPrev)
                     wrongAnswer = rand.nextInt(41);
 
                 answers.add(wrongAnswer); // adding the wrong answers up to 40
+                wrongPrev = wrongAnswer;
             }
 
         }
@@ -152,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Go button and Welcome message show up at landing page
         goButton.setVisibility(View.VISIBLE);
+        Random rand = new Random();
+        welcomeTextView.setText(welcomeMsgs.get(rand.nextInt(welcomeMsgs.size())));
         welcomeTextView.setVisibility(View.VISIBLE);
         // game layout is invisible at the landing page
         gameLayout.setVisibility(View.INVISIBLE);

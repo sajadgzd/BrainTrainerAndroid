@@ -15,7 +15,8 @@
         android:layout_marginEnd="96dp"
         android:text="Welcome!"
         android:textColor="#090808"
-        android:textSize="50sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +29,7 @@
         android:onClick="start"
         android:padding="40dp"
         android:text="Go!"
-        android:textSize="55sp"
+        android:textSize="30sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
