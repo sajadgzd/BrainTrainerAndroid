@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
 
-        // update highest score
+        // update highest score from database, add the highest to scoresLst
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -84,8 +84,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("READ VALUE: ", "Value is: " + value);
 
-                scoresLst.add(Integer.parseInt(value));
-                highestScoreTextView.setText("Highest Score " + value);
+                // if database exists update, else zero
+                if(value == null){
+                    scoresLst.add(score);
+                    highestScoreTextView.setText("Highest Score " + score);
+                } else {
+                    scoresLst.add(Integer.parseInt(value));
+                    highestScoreTextView.setText("Highest Score " + value);
+                }
+
             }
 
             @Override
@@ -113,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 // get the highest score and show to the user
                 resultTextView.setText("Time's up!");
 
-                // update highest score
+                // update highest score from database when finish
                 myRef.addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -172,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         // write to DB
         myRef.setValue(Integer.toString(Collections.max(scoresLst)));
 
-        // update highest score
+        // update highest score from database to display
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
