@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             resultTextView.setText("Wrong! :(");
 
         }
+        //increment the total num of questions
         numberOfQuestions++;
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         newQuestion();
@@ -119,19 +120,18 @@ public class MainActivity extends AppCompatActivity {
         //clear out the array of answers before the next round of question
         answers.clear();
 
-        int wrongPrev = a + b;
-
         // add one correct answer and three wrong answers to answers array
         for (int i=0; i<4; i++){
             if(i == locationOfCorrectAnswer){
                 answers.add(a+b);
             } else {
                 int wrongAnswer = rand.nextInt(41);
-                while(wrongAnswer == a+b || wrongAnswer == wrongPrev)
+
+                // wrongAnswer cannot be a+b or repetitive
+                while(wrongAnswer == a+b || answers.contains(wrongAnswer))
                     wrongAnswer = rand.nextInt(41);
 
-                answers.add(wrongAnswer); // adding the wrong answers up to 40
-                wrongPrev = wrongAnswer;
+                answers.add(wrongAnswer); // adding the wrong answer to answers list to show up
             }
 
         }
