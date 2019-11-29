@@ -106,16 +106,18 @@ public class MainActivity extends AppCompatActivity {
     public void playAgain(View view){
         // reset the game
         tableLayout.setVisibility(View.VISIBLE);
-        score = 0;
+
+//        score = ;
         numberOfQuestions = 0;
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
-        scoresLst.add(score);
-        // write to DB
-        myRef.setValue(Integer.toString(Collections.max(scoresLst)));
-        // update highest score
-//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//        scoresLst.add(score);
 
+//
+        // write to DB
+//        myRef.setValue(Integer.toString(Collections.max(scoresLst)));
+
+        // update highest score
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -123,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
+
+                scoresLst.add(Integer.parseInt(value));
                 Log.i("READ VALUE: ", "Value is: " + value);
                 highestScoreTextView.setText("Highest Score " + value);
             }
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        scoresLst.add(Integer.parseInt(value));
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
@@ -151,13 +156,12 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 // get the highest score and show to the user
                 resultTextView.setText("Time's up!");
-                highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//                highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 //
                 // write to DB
-                myRef.setValue(Integer.toString(Collections.max(scoresLst)));
-                // update highest score
-//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//                myRef.setValue(Integer.toString(Collections.max(scoresLst)));
 
+                // update highest score
                 myRef.addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -211,14 +215,12 @@ public class MainActivity extends AppCompatActivity {
         numberOfQuestions++;
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
-        // update highest score
-        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+
 //
         // write to DB
         myRef.setValue(Integer.toString(Collections.max(scoresLst)));
-        // update highest score
-//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 
+        // update highest score
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
