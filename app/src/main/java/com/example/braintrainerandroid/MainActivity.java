@@ -121,23 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText("Time's up!");
 
                 // update highest score from database when finish
-                myRef.addValueEventListener(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String value = dataSnapshot.getValue(String.class);
-                        Log.i("READ VALUE: ", "Value is: " + value);
-                        highestScoreTextView.setText("Highest Score " + value);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.i("ERROR:: ", "Failed to read value.", error.toException());
-                    }
-                });
+                readFromDataBase();
 
                 timerTextView.setText("0s");
                 playAgainButton.setVisibility(View.VISIBLE);
@@ -180,23 +164,7 @@ public class MainActivity extends AppCompatActivity {
         myRef.setValue(Integer.toString(Collections.max(scoresLst)));
 
         // update highest score from database to display
-        myRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.i("READ VALUE: ", "Value is: " + value);
-                highestScoreTextView.setText("Highest Score " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.i("ERROR:: ", "Failed to read value.", error.toException());
-            }
-        });
+        readFromDataBase();
 
         newQuestion();
     }
@@ -237,6 +205,27 @@ public class MainActivity extends AppCompatActivity {
         button2.setText(Integer.toString(answers.get(2)));
         button3.setText(Integer.toString(answers.get(3)));
 
+    }
+
+    public void readFromDataBase(){
+        // update highest score from database
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.i("READ VALUE: ", "Value is: " + value);
+                highestScoreTextView.setText("Highest Score " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.i("ERROR:: ", "Failed to read value.", error.toException());
+            }
+        });
     }
 
 
