@@ -12,6 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     // other 3 are randomly generated wrong Integers
     ArrayList<Integer> answers = new ArrayList<>();
 
+    // Array to store scores
+    ArrayList<Integer> scoresLst = new ArrayList<>();
+
     // ArrayList to hold random welcome messages
     ArrayList<String> welcomeMsgs = new ArrayList<String>(){
         {
@@ -56,12 +60,14 @@ public class MainActivity extends AppCompatActivity {
         numberOfQuestions = 0;
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
+        scoresLst.add(score);
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
         resultTextView.setText("");
 
-        new CountDownTimer(30100, 1000){
+        // Timer starts meanwhile user is playing until time's up & the tableLayout become invisible
+        new CountDownTimer(4100, 1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -70,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                resultTextView.setText("Time's up!");
+                // get the highest score and show to the user
+                resultTextView.setText("Time's up!\n Your high score is: " + Collections.max(scoresLst));
                 timerTextView.setText("0s");
                 playAgainButton.setVisibility(View.VISIBLE);
                 tableLayout.setVisibility(View.INVISIBLE);
@@ -105,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         //increment the total num of questions
         numberOfQuestions++;
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
+        scoresLst.add(score);
+
         newQuestion();
     }
 
