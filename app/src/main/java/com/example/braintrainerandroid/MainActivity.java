@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
+        // update highest score
         highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 
         newQuestion();
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         numberOfQuestions++;
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
+        // update highest score
         highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
 
         newQuestion();
