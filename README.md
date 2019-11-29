@@ -14,3 +14,8 @@ An Android app that lets the user play Math games to gain higher scores within t
  * Java
  * Firebase Realtime database
 
+
+## App Display
+![landing page](/images/11.png)
+![game page](/images/22.png)
+![result page](/images/33.png)
