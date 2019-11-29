@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 //        DatabaseReference myRef = database.getReference("message");
 //         myRef.setValue("Hello, World!");
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("test");
+    DatabaseReference myRef = database.getReference("highestScore");
 
     // Read:
     // Read from the database
@@ -111,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
         numberOfQuestions = 0;
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
-//        scoresLst.add(score);
-
-//
-        // write to DB
-//        myRef.setValue(Integer.toString(Collections.max(scoresLst)));
 
         // update highest score
         myRef.addValueEventListener(new ValueEventListener() {
@@ -126,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
 
-                scoresLst.add(Integer.parseInt(value));
                 Log.i("READ VALUE: ", "Value is: " + value);
+
+                scoresLst.add(Integer.parseInt(value));
                 highestScoreTextView.setText("Highest Score " + value);
             }
 
@@ -155,10 +151,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 // get the highest score and show to the user
                 resultTextView.setText("Time's up!");
-//                highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
-//
-                // write to DB
-//                myRef.setValue(Integer.toString(Collections.max(scoresLst)));
 
                 // update highest score
                 myRef.addValueEventListener(new ValueEventListener() {
