@@ -1,5 +1,5 @@
 # BrainTrainerAndroid
-An Android app that lets the user play Math games to gain higher scores within 30 seconds of timer counting down.
+An Android app that lets the user play Math games to gain higher scores within the time limit.
 
 
 * There will be random simple Math questions showing up on the screen with multiple choices to pick.
