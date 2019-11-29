@@ -11,7 +11,7 @@ An Android app that lets the user play Math games to gain higher scores within t
 
 
 ## Technologies
- * Java
+ * Java | Android Studio
  * Firebase Realtime database
 
 
