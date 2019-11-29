@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,34 +23,37 @@ public class MainActivity extends AppCompatActivity {
     int numberOfQuestions = 0;
     TextView scoreTextView;
     TextView timerTextView;
-
     TextView sumTextView;
     Button button0;
     Button button1;
     Button button2;
     Button button3;
-
     Button playAgainButton;
     ConstraintLayout gameLayout;
+    TextView welcomeTextView;
+    TableLayout tableLayout;
 
     //Array to hold the numbers
     ArrayList<Integer> answers = new ArrayList<>();
 
+    // play again is clicked or game starts
     public void playAgain(View view){
         // reset the game
+        tableLayout.setVisibility(View.VISIBLE);
         score = 0;
         numberOfQuestions = 0;
-        timerTextView.setText("30s");
-        scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+        timerTextView.setText(" s");
+        scoreTextView.setText((score) + "/" + (numberOfQuestions));
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
+        resultTextView.setText("");
 
         new CountDownTimer(4100, 1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
-                timerTextView.setText(String.valueOf(millisUntilFinished / 1000 + "s"));
+                timerTextView.setText((millisUntilFinished / 1000 + "s"));
             }
 
             @Override
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText("Time's up!");
                 timerTextView.setText("0s");
                 playAgainButton.setVisibility(View.VISIBLE);
+                tableLayout.setVisibility(View.INVISIBLE);
+
             }
         }.start();
 
@@ -65,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
     // Go button disappears once clicked
     public void start(View view){
         goButton.setVisibility(View.INVISIBLE);
+        welcomeTextView.setVisibility(View.INVISIBLE);
         playAgain(findViewById(R.id.timerTextView));
         gameLayout.setVisibility(View.VISIBLE);
     }
 
+    // user chooses the answer
     public void chooseAnswer(View view){
         // Log.i("tag: ",view.getTag().toString()) ;
+
         // checking to see if the choice is correct or wrong
         if (Integer.toString(locationOfCorrectAnswer).equals(view.getTag().toString())){
             Log.i("Correct!!", "You win");
@@ -82,16 +91,17 @@ public class MainActivity extends AppCompatActivity {
 
         }
         numberOfQuestions++;
-        scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+        scoreTextView.setText((score) + "/" + (numberOfQuestions));
         newQuestion();
     }
 
+    // creating new questions with random ints
     public void newQuestion(){
         Random rand = new Random();
         int a = rand.nextInt(21); // range 0 to 20
         int b = rand.nextInt(21);
 
-        sumTextView.setText(Integer.toString(a) + " + " + Integer.toString(b));
+        sumTextView.setText((a) + " + " + (b));
 
         // set the location of correct answer
         locationOfCorrectAnswer = rand.nextInt(4);
@@ -99,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         //clear out the array of answers before the next round of questions
         answers.clear();
 
+        // add one correct answer and three wrong answers to answers array
         for (int i=0; i<4; i++){
             if(i == locationOfCorrectAnswer){
                 answers.add(a+b);
@@ -111,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        // update the button values
+        // update the button texts
         button0.setText(Integer.toString(answers.get(0)));
         button1.setText(Integer.toString(answers.get(1)));
         button2.setText(Integer.toString(answers.get(2)));
@@ -130,17 +141,19 @@ public class MainActivity extends AppCompatActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.button3);
-
         resultTextView = findViewById(R.id.resultTextView);
         scoreTextView = findViewById(R.id.scoreTextView);
         timerTextView = findViewById(R.id.timerTextView);
         goButton = findViewById(R.id.goButton);
         playAgainButton = findViewById(R.id.playAgainButton);
-
-        goButton.setVisibility(View.VISIBLE);
-
         gameLayout = findViewById(R.id.gameLayout);
+        tableLayout = findViewById(R.id.tableLayout);
+        welcomeTextView = findViewById(R.id.welcomeTextView);
 
+        // Go button and Welcome message show up at landing page
+        goButton.setVisibility(View.VISIBLE);
+        welcomeTextView.setVisibility(View.VISIBLE);
+        // game layout is invisible at the landing page
         gameLayout.setVisibility(View.INVISIBLE);
 
 
