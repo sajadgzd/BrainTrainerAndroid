@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         playAgainButton.setVisibility(View.INVISIBLE);
         resultTextView.setText("");
 
-        new CountDownTimer(4100, 1000){
+        new CountDownTimer(30100, 1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -110,12 +110,13 @@ public class MainActivity extends AppCompatActivity {
         int a = rand.nextInt(21); // range 0 to 20
         int b = rand.nextInt(21);
 
+        // updating the question text
         sumTextView.setText((a) + " + " + (b));
 
-        // set the location of correct answer
+        // set the location of correct answer - 0 to 3 locations
         locationOfCorrectAnswer = rand.nextInt(4);
 
-        //clear out the array of answers before the next round of questions
+        //clear out the array of answers before the next round of question
         answers.clear();
 
         int wrongPrev = a + b;
