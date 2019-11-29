@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity {
     TextView welcomeTextView;
     TableLayout tableLayout;
 
-    //Array to hold the numbers
+    // ArrayList to hold the Integers, one of which is correct answer to the question,
+    // other 3 are randomly generated wrong Integers
     ArrayList<Integer> answers = new ArrayList<>();
+
+    // ArrayList to hold random welcome messages
     ArrayList<String> welcomeMsgs = new ArrayList<String>(){
         {
             add("Wanna Train Your Brain?");
