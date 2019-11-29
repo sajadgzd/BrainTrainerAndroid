@@ -16,6 +16,6 @@ An Android app that lets the user play Math games to gain higher scores within t
 
 
 ## App Display
-![landing page](/images/11.png){:height="50%" width="50%"}
+![landing page]<img src="/images/11.png" width="40" height="40">
 ![game page](/images/22.png){:height="50%" width="50%"}
 ![result page](/images/33.png){:height="50%" width="50%"}
