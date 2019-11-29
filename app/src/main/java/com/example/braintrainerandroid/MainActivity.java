@@ -11,11 +11,60 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Tag;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    //
+    // Write a message to the database
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("message");
+//         myRef.setValue("Hello, World!");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("test");
+
+    // Read:
+    // Read from the database
+    //     myRef.addValueEventListener(new ValueEventListener() {
+    //        @Override
+    //        public void onDataChange(DataSnapshot dataSnapshot) {
+    //            // This method is called once with the initial value and again
+    //            // whenever data at this location is updated.
+    //            String value = dataSnapshot.getValue(String.class);
+    //            Log.d(TAG, "Value is: " + value);
+    //        }
+    //
+    //        @Override
+    //        public void onCancelled(DatabaseError error) {
+    //            // Failed to read value
+    //            Log.w(TAG, "Failed to read value.", error.toException());
+    //        }
+    //    });
+    // Read from the database
+//         myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
 
     Button goButton;
     int locationOfCorrectAnswer;
@@ -62,8 +111,29 @@ public class MainActivity extends AppCompatActivity {
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
         scoresLst.add(score);
+        // write to DB
+        myRef.setValue(Integer.toString(Collections.max(scoresLst)));
         // update highest score
-        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.i("READ VALUE: ", "Value is: " + value);
+                highestScoreTextView.setText("Highest Score " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.i("ERROR:: ", "Failed to read value.", error.toException());
+            }
+        });
+
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
@@ -82,6 +152,30 @@ public class MainActivity extends AppCompatActivity {
                 // get the highest score and show to the user
                 resultTextView.setText("Time's up!");
                 highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//
+                // write to DB
+                myRef.setValue(Integer.toString(Collections.max(scoresLst)));
+                // update highest score
+//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+
+                myRef.addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.i("READ VALUE: ", "Value is: " + value);
+                        highestScoreTextView.setText("Highest Score " + value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.i("ERROR:: ", "Failed to read value.", error.toException());
+                    }
+                });
+
                 timerTextView.setText("0s");
                 playAgainButton.setVisibility(View.VISIBLE);
                 tableLayout.setVisibility(View.INVISIBLE);
@@ -119,6 +213,29 @@ public class MainActivity extends AppCompatActivity {
         scoresLst.add(score);
         // update highest score
         highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+//
+        // write to DB
+        myRef.setValue(Integer.toString(Collections.max(scoresLst)));
+        // update highest score
+//        highestScoreTextView.setText("Highest Score " + Collections.max(scoresLst));
+
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.i("READ VALUE: ", "Value is: " + value);
+                highestScoreTextView.setText("Highest Score " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.i("ERROR:: ", "Failed to read value.", error.toException());
+            }
+        });
 
         newQuestion();
     }
