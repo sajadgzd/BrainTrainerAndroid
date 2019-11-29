@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         // reset the game
         tableLayout.setVisibility(View.VISIBLE);
 
-//        score = ;
+        score = 0;
         numberOfQuestions = 0;
         timerTextView.setText(" s");
         scoreTextView.setText((score) + "/" + (numberOfQuestions));
@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        scoresLst.add(Integer.parseInt(value));
 
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
