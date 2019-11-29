@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         resultTextView.setText("");
 
         // Timer starts meanwhile user is playing until time's up & the tableLayout become invisible
-        new CountDownTimer(4100, 1000){
+        new CountDownTimer(30100, 1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
