@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     TableLayout tableLayout;
     TextView highestScoreTextView;
 
+    int unicodeWin = 0x1F44F;
+    int unicodeLose = 0x1F44E;
+//    int unicodeAgain = 	0x1F64C;
+
+
     // ArrayList to hold the Integers, one of which is correct answer to the question,
     // other 3 are randomly generated wrong Integers
     ArrayList<Integer> answers = new ArrayList<>();
@@ -147,11 +152,11 @@ public class MainActivity extends AppCompatActivity {
         // checking to see if the choice is correct or wrong
         if (Integer.toString(locationOfCorrectAnswer).equals(view.getTag().toString())){
             Log.i("Correct!!", "You win");
-            resultTextView.setText("Correct! :)");
+            resultTextView.setText("Correct! " +  new String(Character.toChars(unicodeWin)));
             score++;
         } else {
             Log.i("Wrong!", "you Lose!");
-            resultTextView.setText("Wrong! :(");
+            resultTextView.setText("Wrong! " + new String(Character.toChars(unicodeLose)));
 
         }
         //increment the total num of questions
@@ -244,6 +249,9 @@ public class MainActivity extends AppCompatActivity {
         timerTextView = findViewById(R.id.timerTextView);
         goButton = findViewById(R.id.goButton);
         playAgainButton = findViewById(R.id.playAgainButton);
+        playAgainButton.setText("Play Again! "
+//                + new String(Character.toChars(unicodeAgain))
+        );
         gameLayout = findViewById(R.id.gameLayout);
         tableLayout = findViewById(R.id.tableLayout);
         welcomeTextView = findViewById(R.id.welcomeTextView);
