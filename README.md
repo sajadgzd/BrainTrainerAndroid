@@ -19,9 +19,7 @@ An Android app that lets the user play Math games to gain higher scores within t
 <p float="left">
 <img src="/images/11.png" width="150px" height="300px"">
 <img src="/images/22.png" width="150px" height="300px"">
-
 <img src="/images/33.png" width="150px" height="300px"">
 <img src="/images/44.png" width="150px" height="300px"">
-
 <img src="/images/55.png" width="150px" height="300px"">
 </p>
